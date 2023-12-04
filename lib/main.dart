@@ -6,15 +6,16 @@ import 'package:skeleton/blocs/auth_bloc/auth_bloc.dart';
 import 'package:skeleton/routes/app_routers.dart';
 import 'package:skeleton/services/local_storage.dart';
 import 'package:skeleton/themes/main_theme.dart';
+import 'package:url_strategy/url_strategy.dart';
 import 'injection_container.dart' as di;
 
 void main() async {
+  setPathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   await LocalStorage.configurePrefs();
   await di.initLocator();
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp]);
-  runApp( AppState());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(AppState());
 }
 
 class AppState extends StatelessWidget {
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Tramita tu VISA Online',
       theme: Themes.appTheme,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
