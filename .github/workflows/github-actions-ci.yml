@@ -58,6 +58,19 @@ jobs:
         cd public
         git config --global user.name "SangheliosBlack"
         git config --global user.email "julio.villagrana.sanghelios2@gmail.com"
+    
+        # Configuración de la clave SSH (si estás usando una clave SSH)
+        echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+        chmod 600 ~/.ssh/config
+    
+        # Realizar el commit
         git add -A
         git commit -m "Update build"
+    
+        # Realizar el push utilizando la clave SSH o el token de acceso personal
         git push origin main
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock  # Necesario si estás utilizando una clave SSH
+      secrets:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}  # La clave SSH o el token de acceso personal
+
