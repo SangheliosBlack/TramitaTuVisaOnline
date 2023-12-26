@@ -34,16 +34,16 @@ jobs:
       uses: actions/checkout@v2.5.0
       with:
         repository: SangheliosBlack/TramitaTuVisaOnlineServer
-        path: server-repo 
+        path: public
         ref: main
-        ssh-key: ${{ secrets.SECRET_KEY  }} 
+        ssh-key: ${{ secrets.SECRET_KEY }} 
 
     - name: Copy build to server repository
-      run: cp -r build/web server-repo/public/
+      run: cp -r build/web public/
 
     - name: Commit and Push to Server Repository
       run: |
-        cd server-repo
+        cd public
         git config --global user.name "SangheliosBlack"
         git config --global user.email "julio.villagrana.sanghelios2@gmail.com"
         git add -A
