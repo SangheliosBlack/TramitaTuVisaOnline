@@ -35,9 +35,7 @@ jobs:
       with:
         repository: SangheliosBlack/TramitaTuVisaOnlineServer
         path: server-repo 
-
-    - name: Ensure server-repo/public exists
-      run: mkdir -p server-repo/public
+        ref: main
 
     - name: Copy build to server repository
       run: cp -r build/web server-repo/public/
