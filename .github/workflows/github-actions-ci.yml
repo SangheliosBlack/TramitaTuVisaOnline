@@ -24,6 +24,9 @@ jobs:
     - name: Build Flutter Web
       run: flutter build web --web-renderer canvaskit
 
+    - name: List files in build/web
+      run: ls -R build/web
+
     - name: Move build directory to a safe location
       run: mv build/web /tmp/my_build
 
@@ -42,7 +45,7 @@ jobs:
         ssh-key: ${{ secrets.SECRET_KEY }} 
 
     - name: Copy build to server repository
-      run: cp -r /tmp/my_build/* public/
+      run: cp -r /tmp/my_build/. public/
 
     - name: Commit and Push to Server Repository
       run: |
