@@ -52,7 +52,7 @@ jobs:
 
     - name: Copy build to server repository
       run: cp -r /tmp/my_build/. public/
-
+    
     - name: Commit and Push to Server Repository
       run: |
         cd public
@@ -60,17 +60,19 @@ jobs:
         git config --global user.email "julio.villagrana.sanghelios2@gmail.com"
     
         # Configuración de la clave SSH (si estás usando una clave SSH)
-        echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-        chmod 600 ~/.ssh/config
+        eval "$(ssh-agent -s)"
+        ssh-add - <<< "${{ secrets.SECRET_KEY }}"
+    
+        # Configuración de git para usar el agente SSH
+        git config --global core.sshCommand 'ssh -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa'
     
         # Realizar el commit
         git add -A
         git commit -m "Update build"
     
-        # Realizar el push utilizando la clave SSH o el token de acceso personal
+        # Realizar el push utilizando el agente SSH
         git push origin main
       env:
-        SSH_AUTH_SOCK: /tmp/ssh_agent.sock  # Necesario si estás utilizando una clave SSH
-      secrets:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}  # La clave SSH o el token de acceso personal
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+    
 
