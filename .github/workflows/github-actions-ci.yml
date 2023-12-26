@@ -24,11 +24,11 @@ jobs:
     - name: Build Flutter Web
       run: flutter build web --web-renderer canvaskit
 
-    - name: List files in build/web
-      run: ls -R build/web
-
-    - name: Move build directory to a safe location
-      run: mv build/web /tmp/my_build
+    - name: Archive build directory
+      uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: build/web
 
   deploy:
     runs-on: ubuntu-latest
@@ -43,6 +43,12 @@ jobs:
         path: public
         ref: main
         ssh-key: ${{ secrets.SECRET_KEY }} 
+
+    - name: Download build artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: build
+        path: /tmp/my_build
 
     - name: Copy build to server repository
       run: cp -r /tmp/my_build/. public/
