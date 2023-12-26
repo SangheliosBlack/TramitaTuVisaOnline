@@ -37,23 +37,14 @@ jobs:
 
     steps:
     - name: Checkout Server Repository
-      uses: actions/checkout@v2.5.0
+      - uses: actions/checkout@v2.5.0
+      - uses: webfactory/ssh-agent@v0.8.0
+        with:
+            ssh-private-key: ${{ secrets.SECRET_KEY }}
       with:
         repository: SangheliosBlack/TramitaTuVisaOnlineServer
         path: public
         ref: main
-
-    - name: Setup SSH Keys and known_hosts
-        env:
-            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-            ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-            ssh-add - <<< "${{ secrets.SECRET_KEY }
-            
-    - name: Some task that fetches dependencies
-        env:
-            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: ./fetch-deps.sh
 
     - name: Download build artifact
       uses: actions/download-artifact@v2
