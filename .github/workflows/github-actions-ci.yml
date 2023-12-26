@@ -43,13 +43,17 @@ jobs:
         path: public
         ref: main
 
-    - name: Set up SSH key
+    - name: Setup SSH Keys and known_hosts
+        env:
+            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SECRET_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
+            ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+            ssh-add - <<< "${{ secrets.SECRET_KEY }
+            
+    - name: Some task that fetches dependencies
+        env:
+            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: ./fetch-deps.sh
 
     - name: Download build artifact
       uses: actions/download-artifact@v2
