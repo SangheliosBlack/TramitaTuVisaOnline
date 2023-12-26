@@ -25,7 +25,7 @@ class AuthPage extends StatelessWidget {
           if (state is AuthError) {
             AppMessages.showSnackBar(context: context, message: state.message);
           } else if (state is AuthSuccess) {
-            context.router.replaceNamed('/dashboard');
+            context.router.replaceNamed('/dashdddboard');
           }
         },
         child: SingleChildScrollView(

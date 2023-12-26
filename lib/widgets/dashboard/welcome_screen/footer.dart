@@ -17,8 +17,8 @@ class Footer extends StatelessWidget {
           builder: (BuildContext context, SizingInformation sizingInformation) {
             return Container(
               padding: EdgeInsets.symmetric(
-                  horizontal: sizingInformation.isMobile ? 35 : 20,
-                  vertical: 20),
+                  horizontal: sizingInformation.isMobile ? 15 : 20,
+                  vertical: sizingInformation.isMobile ? 10 : 20),
               child: const Row(
                 children: [
                   Icon(
@@ -50,8 +50,9 @@ class Footer extends StatelessWidget {
         ResponsiveBuilder(
           builder: (BuildContext context, SizingInformation sizingInformation) {
             return Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                padding: EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: sizingInformation.isMobile ? 10 : 20),
                 width: context.width,
                 decoration: const BoxDecoration(color: Colors.black),
                 child: Column(
@@ -71,7 +72,8 @@ class Footer extends StatelessWidget {
                               : [
                                   const OptionFooter(text: "Sobre nosotros"),
                                   const OptionFooter(text: "Visa B1B2"),
-                                  const OptionFooter(text: "Preguntas frecuentes"),
+                                  const OptionFooter(
+                                      text: "Preguntas frecuentes"),
                                   const OptionFooter(text: "Terminos de uso"),
                                   const OptionFooter(text: "Contacto"),
                                 ],
@@ -112,7 +114,7 @@ class Footer extends StatelessWidget {
   }
 }
 
-class OptionFooter extends StatelessWidget {
+class OptionFooter extends StatefulWidget {
   final String text;
   const OptionFooter({
     super.key,
@@ -120,12 +122,33 @@ class OptionFooter extends StatelessWidget {
   });
 
   @override
+  State<OptionFooter> createState() => _OptionFooterState();
+}
+
+class _OptionFooterState extends State<OptionFooter> {
+  bool enabled = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 25),
-      child: Text(
-        text,
-        style: GoogleFonts.quicksand(color: Colors.grey),
+    return MouseRegion(
+      onEnter: (e) {
+        setState(() {
+          enabled = true;
+        });
+      },
+      onExit: (e) {
+        setState(() {
+          enabled = false;
+        });
+      },
+      cursor: SystemMouseCursors.click,
+      child: Container(
+        padding: const EdgeInsets.only(left: 25),
+        child: Text(
+          widget.text,
+          style: GoogleFonts.quicksand(
+              color: enabled ? Colors.white : Colors.grey),
+        ),
       ),
     );
   }

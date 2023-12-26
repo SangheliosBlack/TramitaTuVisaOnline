@@ -1,0 +1,49 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.16.0'
+
+    - name: Install Dependencies
+      run: flutter pub get
+
+    - name: Build Flutter Web
+      run: flutter build web --web-renderer canvaskit
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - name: Checkout Server Repository
+      uses: actions/checkout@v2
+      with:
+        repository: SangheliosBlack/TramitaTuVisaOnlineServer
+        path: server-repo 
+
+    - name: Copy build to server repository
+      run: cp -r build/web server-repo/public/
+
+    - name: Commit and Push to Server Repository
+      run: |
+        cd server-repo
+        git config --global user.name "SangheliosBlack"
+        git config --global user.email "julio.villagrana.sanghelios2@gmail.com"
+        git add -A
+        git commit -m "Update build"
+        git push origin main
