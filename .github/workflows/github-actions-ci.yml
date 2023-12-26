@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.5.0
 
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
@@ -31,7 +31,7 @@ jobs:
 
     steps:
     - name: Checkout Server Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.5.0
       with:
         repository: SangheliosBlack/TramitaTuVisaOnlineServer
         path: server-repo 
