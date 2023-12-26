@@ -42,7 +42,7 @@ jobs:
         repository: SangheliosBlack/TramitaTuVisaOnlineServer
         path: public
         ref: main
-        token: ${{ secrets.SECRET_KEY }} 
+        ssh-key: ${{ secrets.SECRET_KEY }} 
 
     - name: Download build artifact
       uses: actions/download-artifact@v2
