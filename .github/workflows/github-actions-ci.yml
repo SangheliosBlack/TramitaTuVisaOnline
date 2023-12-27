@@ -40,7 +40,6 @@ jobs:
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.SECRET_KEY }}
-          passphrase: 'Jamon2011'
 
       - name: Checkout Server Repository
         uses: actions/checkout@v2.5.0
