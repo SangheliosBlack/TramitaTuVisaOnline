@@ -42,12 +42,12 @@ jobs:
           ssh-private-key: ${{ secrets.SECRET_KEY }}
 
       - name: Checkout Server Repository
-        uses: actions/checkout@v2.5.0
+        uses: actions/checkout@v4
         with:
           repository: SangheliosBlack/TramitaTuVisaOnlineServer
-          path: public
-          token: ${{ secrets.SECRET_KEY }}
           ref: main
+          ssh-key: ${{ secrets.SECRET_KEY }}
+          path: public
 
       - name: Download build artifact
         uses: actions/download-artifact@v2
