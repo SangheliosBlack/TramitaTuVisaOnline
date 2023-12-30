@@ -14,6 +14,7 @@ class LoginButton extends StatefulWidget {
 
 class _LoginButtonState extends State<LoginButton> {
   bool enabled = false;
+  bool enabled2 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -70,25 +71,25 @@ class _LoginButtonState extends State<LoginButton> {
                   : Container(),
               GestureDetector(
                 onTap: () {
-                  context.router.pushNamed('/login');
+                  context.router.pushNamed('login');
                 },
                 child: MouseRegion(
                   cursor: SystemMouseCursors.click,
                   onEnter: (e) {
                     setState(() {
-                      enabled = true;
+                      enabled2 = true;
                     });
                   },
                   onExit: (e) {
                     setState(() {
-                      enabled = false;
+                      enabled2 = false;
                     });
                   },
                   child: AnimatedContainer(
                     padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: !enabled ? Colors.black : Colors.blueGrey),
+                        color: !enabled2 ? Colors.black : Colors.blueGrey),
                     duration: const Duration(milliseconds: 300),
                     child: const Icon(
                       FontAwesomeIcons.solidUser,

@@ -14,7 +14,6 @@ class AuthRepository {
       final response = await httpService.post(
           path: '/auth/login', data: {'email': userName, 'password': password});
 
-      print(response.body);
 
       final result = (jsonDecode(response.body));
 

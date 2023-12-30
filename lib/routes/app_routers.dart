@@ -46,6 +46,7 @@ class AppRouter extends _$AppRouter {
                   durationInMilliseconds: 100,
                   path: 'login'),
               CustomRoute(
+                initial: true,
                   page: WelcomeViewRoute.page,
                   transitionsBuilder: TransitionsBuilders.fadeIn,
                   reverseDurationInMilliseconds: 100,
@@ -56,25 +57,25 @@ class AppRouter extends _$AppRouter {
                   transitionsBuilder: TransitionsBuilders.fadeIn,
                   reverseDurationInMilliseconds: 0,
                   durationInMilliseconds: 0,
-                  path: 'visa-primera-vez'),
+                  path: 'visa_primera-vez'),
               CustomRoute(
                   page: VisaRenovacionRoute.page,
                   transitionsBuilder: TransitionsBuilders.fadeIn,
                   reverseDurationInMilliseconds: 0,
                   durationInMilliseconds: 0,
-                  path: 'visa-renovacion'),
+                  path: 'visa_renovacion'),
               CustomRoute(
                   page: PasaporteRoute.page,
                   transitionsBuilder: TransitionsBuilders.fadeIn,
                   reverseDurationInMilliseconds: 0,
                   durationInMilliseconds: 0,
-                  path: 'pasaporte-mexicano'),
+                  path: 'pasaporte_mexicano'),
               CustomRoute(
                   page: GlobalEntryRoute.page,
                   transitionsBuilder: TransitionsBuilders.fadeIn,
                   reverseDurationInMilliseconds: 0,
                   durationInMilliseconds: 0,
-                  path: 'global-entry'),
+                  path: 'global_entry'),
             ],
             path: '/welcome'),
       ];

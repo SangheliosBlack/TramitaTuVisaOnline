@@ -1,14 +1,13 @@
 // config_dev.dart
 
 import 'package:ansicolor/ansicolor.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logging/logging.dart';
 import 'package:skeleton/helpers/colorized_helper.dart';
 import 'package:skeleton/helpers/logger.dart';
 
 class Developer {
-  final backendUrl = dotenv.env['BACKEND_URL']!;
-  final port = dotenv.env['PORT']!;
+  final backendUrl = "https://www.tramitesvisaonline.com/api/v1";
+  final port = "";
   Logger logger = LogHelper.getLogger(LogNames.SERVER_CONNECTION);
 
   String apiUrl() {

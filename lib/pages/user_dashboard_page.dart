@@ -23,20 +23,20 @@ class _DashboardPageState extends State<UserDashboardPage> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
-          listener: (context, state) {
-            if (state is AuthError) {
-              if (state.message.isNotEmpty) {
-                AppMessages.showSnackBar(
-                    context: context,
-                    message: state.message,
-                    backgroundColor: Colors.red);
-              }
-            } else if (state is AuthSuccess) {
-              context.router.replaceNamed('/dashdddboard');
-            }
-          },
+      listener: (context, state) {
+        if (state is AuthError) {
+          if (state.message.isNotEmpty) {
+            AppMessages.showSnackBar(
+                context: context,
+                message: state.message,
+                backgroundColor: Colors.red);
+          }
+        } else if (state is AuthSuccess) {
+          context.router.replaceNamed('/dashdddboard');
+        }
+      },
       child: Scaffold(
-          backgroundColor: const Color.fromRGBO(236, 240, 245, 1),
+          backgroundColor: Color.fromRGBO(2, 2, 2, 1),
           body: Row(
             children: [
               const AsideLayout(),

@@ -23,7 +23,7 @@ class Header extends StatelessWidget {
                     )),
                     const Option(
                       titulo: 'VISA Primera vez',
-                      url: 'visa-primera-vez',
+                      url: 'visa_primera-vez',
                     ),
                     Container(
                       width: 50,
@@ -32,7 +32,7 @@ class Header extends StatelessWidget {
                     ),
                     const Option(
                       titulo: 'VISA Renovacion',
-                      url: 'visa-renovacion',
+                      url: 'visa_renovacion',
                     ),
                     Container(
                       width: 50,
@@ -42,7 +42,7 @@ class Header extends StatelessWidget {
                     const Option(
                       show: true,
                       titulo: 'Global Entry',
-                      url: 'global-entry',
+                      url: 'global_entry',
                     ),
                     Container(
                       width: 50,
@@ -51,7 +51,7 @@ class Header extends StatelessWidget {
                     ),
                     const Option(
                       titulo: 'Pasaporte Mexicano',
-                      url: 'pasaporte-mexicano',
+                      url: 'pasaporte_mexicano',
                     ),
                     Expanded(
                         child: Container(

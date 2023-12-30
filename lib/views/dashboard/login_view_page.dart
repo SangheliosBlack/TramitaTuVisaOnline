@@ -24,6 +24,7 @@ class _LoginViewPageState extends State<LoginViewPage> {
   final FocusNode focusEmail = FocusNode();
   final FocusNode focusPassword = FocusNode();
   final _formKey = GlobalKey<FormState>();
+  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -286,10 +287,23 @@ class _LoginViewPageState extends State<LoginViewPage> {
                                           validator: passwordValidator,
                                           controller: passwordController,
                                           focusNode: focusPassword,
-                                          obscureText: true,
+                                          obscureText: obscureText,
                                           keyboardType: TextInputType.text,
                                           textInputAction: TextInputAction.done,
                                           decoration: InputDecoration(
+                                            suffixIcon: IconButton(
+                                              icon: Icon(
+                                                obscureText
+                                                    ? Icons.visibility
+                                                    : Icons.visibility_off,
+                                                color: Colors.grey,
+                                              ),
+                                              onPressed: () {
+                                                setState(() {
+                                                  obscureText = !obscureText;
+                                                });
+                                              },
+                                            ),
                                             labelText: 'Contraseña',
                                             contentPadding: const EdgeInsets
                                                 .symmetric(

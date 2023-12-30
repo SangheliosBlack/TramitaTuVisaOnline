@@ -35,7 +35,7 @@ class _AsideLayoutState extends State<AsideLayout> {
                       width: 10,
                     ),
                     CircleAvatar(
-                      backgroundColor: const Color.fromRGBO(26, 34, 38, 1),
+                      backgroundColor: const Color.fromRGBO(30, 30, 30, 1),
                       child: Text(
                         "T",
                         style: GoogleFonts.quicksand(color: Colors.white),
@@ -48,9 +48,9 @@ class _AsideLayoutState extends State<AsideLayout> {
                                 width: 15,
                               ),
                               Text(
-                                "Tresga",
+                                "Tramita tu VISA",
                                 style: GoogleFonts.quicksand(
-                                    color: Colors.grey, fontSize: 15),
+                                    color: Colors.white, fontSize: 15),
                               ),
                             ],
                           )
@@ -69,10 +69,8 @@ class _AsideLayoutState extends State<AsideLayout> {
                       isOpen = !isOpen;
                     });
                   },
-                  child: Icon(
-                    isOpen ? Icons.chevron_left : Icons.chevron_right,
-                    color: const Color.fromRGBO(26, 34, 38, 1),
-                  ),
+                  child: Icon(isOpen ? Icons.chevron_left : Icons.chevron_right,
+                      color: Colors.white),
                 ),
               ),
               isOpen
@@ -113,8 +111,9 @@ class _AsideLayoutState extends State<AsideLayout> {
                               ),
                               Text(
                                 "Buscar aqui",
-                                style:
-                                    GoogleFonts.quicksand(color: Colors.grey),
+                                style: GoogleFonts.quicksand(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ],
                           ),
@@ -123,7 +122,7 @@ class _AsideLayoutState extends State<AsideLayout> {
                                 horizontal: 15, vertical: 5),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                color: const Color.fromRGBO(26, 34, 38, 1)),
+                                color: const Color.fromRGBO(2, 2, 2, 1)),
                             child: Row(
                               children: [
                                 const FaIcon(
@@ -179,7 +178,7 @@ class _AsideLayoutState extends State<AsideLayout> {
               ),
               Text(
                 isOpen ? "MENU PRINCIPAL" : "",
-                style: GoogleFonts.quicksand(color: Colors.grey),
+                style: GoogleFonts.quicksand(color: Colors.white),
               ),
               const SizedBox(
                 height: 15,
@@ -190,7 +189,7 @@ class _AsideLayoutState extends State<AsideLayout> {
                   padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: const Color.fromRGBO(26, 34, 38, 1)),
+                      color: const Color.fromRGBO(30, 30, 30, 1)),
                   child: ListView.separated(
                     padding: const EdgeInsets.symmetric(vertical: 0),
                     physics: const BouncingScrollPhysics(),

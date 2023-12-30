@@ -2,7 +2,6 @@ import 'package:ansicolor/ansicolor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:logging/logging.dart';
 import 'package:skeleton/blocs/auth_bloc/auth_bloc.dart';
@@ -21,7 +20,6 @@ void main() async {
         '${record.level.name}: ${record.time}: ${record.message}: ${record.loggerName}',
         AnsiPen()..green));
   });
-  await dotenv.load(fileName: ".env");
   setPathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   await LocalStorage.configurePrefs();

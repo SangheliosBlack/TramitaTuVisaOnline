@@ -35,7 +35,6 @@ class HttpService {
       {required String path, required Object? data}) async {
     String jsonData = jsonEncode(data);
 
-    print(jsonData);
 
     return await http.post(Uri.parse(apiPath + path),
         headers: _headers(), body: jsonData);

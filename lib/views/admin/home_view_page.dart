@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -12,6 +13,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(body: const Text("JAMONDASDSADAS"));
+    return Scaffold(
+        body: Text(
+      "Mis tramites",
+      style: GoogleFonts.quicksand(color: Colors.black),
+    ));
   }
 }

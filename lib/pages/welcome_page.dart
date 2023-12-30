@@ -74,7 +74,7 @@ class _DashboardPageState extends State<WelcomePage> {
                   ],
                 ),
               ),
-              Container(
+              SizedBox(
                 height: context.height,
                 width: context.width,
               ),
