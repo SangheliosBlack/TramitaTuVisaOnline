@@ -12,8 +12,12 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is AuthError) context.router.replaceNamed('/auth');
-        if (state is AuthSuccess) context.router.replaceNamed('/dashboard');
+        if  (state is AuthSuccess) {
+          context.router.replaceNamed('/dashboard');
+        }
+        else if (state is AuthError){
+          context.router.replaceNamed('/welcome');
+        } 
       },
       child: Scaffold(
         backgroundColor: Themes.primary,
@@ -23,14 +27,10 @@ class SplashPage extends StatelessWidget {
             padding: const EdgeInsets.all(30),
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(100)),
-            width: 180,
-            height: 180,
-            child: const FlutterLogo(
-              duration: Duration(milliseconds: 1000),
-              textColor: Colors.white,
-              style: FlutterLogoStyle.horizontal,
-              size: 70,
-              curve: Curves.bounceOut,
+            width: 90,
+            height: 90,
+            child: const CircularProgressIndicator(
+              color: Colors.black,
             ),
           ),
         ),

@@ -1,20 +1,20 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeleton/blocs/auth_bloc/auth_bloc.dart';
+import 'package:skeleton/helpers/meesages_app_helper.dart';
 import 'package:skeleton/widgets/admin/aside.dart';
 import 'package:skeleton/widgets/admin/top.dart';
 
-
-
 @RoutePage()
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+class UserDashboardPage extends StatefulWidget {
+  const UserDashboardPage({super.key});
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  State<UserDashboardPage> createState() => _DashboardPageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _DashboardPageState extends State<UserDashboardPage> {
   @override
   void initState() {
     super.initState();
@@ -22,9 +22,19 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-      ],
+    return BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state is AuthError) {
+              if (state.message.isNotEmpty) {
+                AppMessages.showSnackBar(
+                    context: context,
+                    message: state.message,
+                    backgroundColor: Colors.red);
+              }
+            } else if (state is AuthSuccess) {
+              context.router.replaceNamed('/dashdddboard');
+            }
+          },
       child: Scaffold(
           backgroundColor: const Color.fromRGBO(236, 240, 245, 1),
           body: Row(
@@ -58,7 +68,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       const TopLayout(),
                       Expanded(
                         child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: const AutoRouter()),
                       )
                     ],

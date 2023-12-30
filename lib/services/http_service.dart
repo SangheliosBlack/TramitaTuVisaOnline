@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:skeleton/config/config.dart';
-import 'package:skeleton/config/load_certificate.dart';
 import 'package:skeleton/services/local_storage.dart';
 
+// Reemplaza 'Developer', 'LocalStorage' y 'loadCertificate' con tus propias implementaciones o clases
+// Reemplaza 'YourDataClass' con el nombre de tu clase de datos si es necesario.
 
 class HttpService {
   final apiPath = Developer().apiUrl();
@@ -19,54 +19,30 @@ class HttpService {
     token = nuevoToken;
     LocalStorage.prefs.setString('token', nuevoToken);
   }
-  void eliminarToken(){
+
+  void eliminarToken() {
     LocalStorage.prefs.remove("token");
   }
 
   Map<String, String> _headers() {
-    return {HttpHeaders.authorizationHeader: "Bearer $token"};
+    return {
+      "authorization": "Bearer $token",
+      "Content-Type": "application/json"
+    };
   }
 
-  Future<http.Response> post({required String path,required  Object? data}) async {
-
+  Future<http.Response> post(
+      {required String path, required Object? data}) async {
     String jsonData = jsonEncode(data);
-    HttpClient httpClient = HttpClient();
-    SecurityContext securityContext = SecurityContext.defaultContext;
 
-    securityContext.setTrustedCertificatesBytes(await loadCertificate());
+    print(jsonData);
 
-    HttpClientRequest request = await httpClient.postUrl(Uri.parse(apiPath + path),);
-    
-    
-    request.headers.set(HttpHeaders.contentTypeHeader, 'application/json');
-    request.headers.set(HttpHeaders.authorizationHeader, "Bearer $token");
-    
-    request.write(jsonData);
-
-    HttpClientResponse response = await request.close();
-
-    String responseBody = await response.transform(utf8.decoder).join();
-    return http.Response(responseBody, response.statusCode);
+    return await http.post(Uri.parse(apiPath + path),
+        headers: _headers(), body: jsonData);
   }
-
 
   Future<http.Response> get({required String path}) async {
-    HttpClient httpClient = HttpClient();
-    SecurityContext securityContext = SecurityContext.defaultContext;
-
-    securityContext.setTrustedCertificatesBytes(await loadCertificate());
-
-    HttpClientRequest request = await httpClient.getUrl(Uri.parse(apiPath + path),);
-    
-    
-    request.headers.set(HttpHeaders.contentTypeHeader, 'application/json');
-    request.headers.set(HttpHeaders.authorizationHeader, "Bearer $token");
-    
-
-    HttpClientResponse response = await request.close();
-
-    String responseBody = await response.transform(utf8.decoder).join();
-    return http.Response(responseBody, response.statusCode);
+    return await http.get(Uri.parse(apiPath + path), headers: _headers());
   }
 
   Future<http.Response> patch({required String path, Object? data}) async {

@@ -1,8 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:skeleton/pages/dashboard_page.dart';
 
 import 'package:skeleton/pages/pages.dart';
-import 'package:skeleton/views/admin/home_page.dart';
+import 'package:skeleton/views/admin/home_view_page.dart';
 import 'package:skeleton/views/views.dart';
 
 part 'app_routers.gr.dart';
@@ -16,23 +15,24 @@ class AppRouter extends _$AppRouter {
             transitionsBuilder: TransitionsBuilders.fadeIn,
             reverseDurationInMilliseconds: 800,
             durationInMilliseconds: 800,
-            path: '/splash'),
-        CustomRoute(
-            page: DashboardRoute.page,
             initial: true,
-            transitionsBuilder: TransitionsBuilders.fadeIn,
-            reverseDurationInMilliseconds: 100,
-            durationInMilliseconds: 100,
-            path: "/admin",
-            
-            children: [
-              CustomRoute(
-                  page: HomeRoute.page,
-                  transitionsBuilder: TransitionsBuilders.fadeIn,
-                  reverseDurationInMilliseconds: 100,
-                  durationInMilliseconds: 100,
-                  path: ''),
-            ]),
+            path: '/'),
+        CustomRoute(
+          page: UserDashboardRoute.page,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+          reverseDurationInMilliseconds: 100,
+          durationInMilliseconds: 100,
+          children: [
+            CustomRoute(
+                page: HomeRoute.page,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                reverseDurationInMilliseconds: 100,
+                durationInMilliseconds: 100,
+                initial: true,
+                path: ''),
+          ],
+          path: "/dashboard",
+        ),
         CustomRoute(
             page: WelcomeRoute.page,
             transitionsBuilder: TransitionsBuilders.fadeIn,
@@ -46,7 +46,6 @@ class AppRouter extends _$AppRouter {
                   durationInMilliseconds: 100,
                   path: 'login'),
               CustomRoute(
-                  initial: true,
                   page: WelcomeViewRoute.page,
                   transitionsBuilder: TransitionsBuilders.fadeIn,
                   reverseDurationInMilliseconds: 100,
@@ -77,12 +76,6 @@ class AppRouter extends _$AppRouter {
                   durationInMilliseconds: 0,
                   path: 'global-entry'),
             ],
-            path: '/'),
-        CustomRoute(
-            page: AuthRoute.page,
-            transitionsBuilder: TransitionsBuilders.fadeIn,
-            reverseDurationInMilliseconds: 400,
-            durationInMilliseconds: 400,
-            path: '/auth'),
+            path: '/welcome'),
       ];
 }

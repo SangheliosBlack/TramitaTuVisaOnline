@@ -1,8 +1,12 @@
+import 'package:ansicolor/ansicolor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:logging/logging.dart';
 import 'package:skeleton/blocs/auth_bloc/auth_bloc.dart';
+import 'package:skeleton/helpers/colorized_helper.dart';
 import 'package:skeleton/routes/app_routers.dart';
 import 'package:skeleton/services/local_storage.dart';
 import 'package:skeleton/themes/main_theme.dart';
@@ -10,6 +14,14 @@ import 'package:url_strategy/url_strategy.dart';
 import 'injection_container.dart' as di;
 
 void main() async {
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((record) {
+    // ignore: avoid_print
+    print(colorize(
+        '${record.level.name}: ${record.time}: ${record.message}: ${record.loggerName}',
+        AnsiPen()..green));
+  });
+  await dotenv.load(fileName: ".env");
   setPathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   await LocalStorage.configurePrefs();

@@ -40,84 +40,29 @@ class AuthRError<T> extends AuthResponse<T> {
 
 Usuario usuarioFromJson(String str) => Usuario.fromJson(json.decode(str));
 
-String usuarioToJson(Usuario data) => json.encode(data.toJson());
 
 class Usuario {
-  int id;
-  dynamic alias;
+  String id;
   String email;
-  String firstName;
-  String fatherLastName;
-  String motherLastName;
-  dynamic profilePhoto;
-  dynamic phone;
-  bool active;
-  DateTime createdAt;
-  Company company;
+  String phone;
+  String name;
+  String role;
 
   Usuario({
     required this.id,
-    required this.alias,
     required this.email,
-    required this.firstName,
-    required this.fatherLastName,
-    required this.motherLastName,
-    required this.profilePhoto,
+    required this.name,
     required this.phone,
-    required this.active,
-    required this.createdAt,
-    required this.company,
+    required this.role
   });
 
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
+    role:json["role"],
         id: json["id"],
-        alias: json["alias"],
         email: json["email"],
-        firstName: json["first_name"],
-        fatherLastName: json["father_last_name"],
-        motherLastName: json["mother_last_name"],
-        profilePhoto: json["profile_photo"],
         phone: json["phone"],
-        active: json["active"],
-        createdAt: DateTime.parse(json["created_at"]),
-        company: Company.fromJson(json["company"]),
+         name: json["name"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "alias": alias,
-        "email": email,
-        "first_name": firstName,
-        "father_last_name": fatherLastName,
-        "mother_last_name": motherLastName,
-        "profile_photo": profilePhoto,
-        "phone": phone,
-        "active": active,
-        "created_at": createdAt.toIso8601String(),
-        "company": company.toJson(),
-      };
 }
 
-class Company {
-  int id;
-  String name;
-  String code;
-
-  Company({
-    required this.id,
-    required this.name,
-    required this.code,
-  });
-
-  factory Company.fromJson(Map<String, dynamic> json) => Company(
-        id: json["id"],
-        name: json["name"],
-        code: json["code"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "code": code,
-      };
-}

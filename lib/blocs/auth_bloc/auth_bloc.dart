@@ -29,7 +29,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   _login(LoginEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
 
-    await Future.delayed(const Duration(seconds: 2));
 
     final result = await authRepository.login(
         userName: event.username, password: event.password);
@@ -46,7 +45,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     final token = LocalStorage.prefs.getString('token');
 
-    await Future.delayed(const Duration(seconds: 3));
 
     if (token != null) {
       final result = await authRepository.isLoggedIn();

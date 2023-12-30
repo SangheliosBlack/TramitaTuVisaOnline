@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:skeleton/helpers/extensions.dart';
 import 'package:skeleton/widgets/dashboard/welcome_screen/aside.dart';
-import 'package:skeleton/widgets/dashboard/welcome_screen/login_button.dart';
 
 @RoutePage()
 class WelcomeViewPage extends StatefulWidget {
