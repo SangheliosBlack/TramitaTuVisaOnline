@@ -1,151 +1,330 @@
-import 'dart:ui';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skeleton/helpers/extensions.dart';
+import 'package:stroke_text/stroke_text.dart';
 
 @RoutePage()
-class VisaRenovacionPage
- extends StatelessWidget {
-  const VisaRenovacionPage
-  ({super.key});
+class VisaRenovacionPage extends StatefulWidget {
+  const VisaRenovacionPage({super.key});
+
+  @override
+  State<VisaRenovacionPage> createState() => _VisaRenovacionPageState();
+}
+
+class _VisaRenovacionPageState extends State<VisaRenovacionPage> {
+  late ScrollController _scrollController;
+  bool isMouseOver = false;
+  bool isMouseOver2 = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      setState(() {
+        // Calcula la opacidad basada en la posición actual del ScrollController
+        double opacity = (_scrollController.offset / 100).clamp(0.0, 1.0);
+        // Actualiza la opacidad solo si el widget está visible
+        if (opacity >= 0.0 && opacity <= 1.0) {
+          _opacity = opacity;
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        margin: const EdgeInsets.only(top: 100, bottom: 130, left: 70, right: 70),
-        width: context.width,
-        height: context.height,
-        child: Row(
+        backgroundColor: Colors.transparent,
+        body: Stack(
           children: [
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 00,
-                      sigmaY: 00,
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.all(30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            "VISA RENOVACION",
-                            style: GoogleFonts.quicksand(
-                                color: Colors.black, fontSize: 40),
-                          ),
-                          const Divider(),
-                          Text(
-                            "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500,",
-                            style: GoogleFonts.quicksand(color: Colors.grey),
-                            overflow: TextOverflow.visible,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: ColorFiltered(
-                                      colorFilter: const ColorFilter.mode(
-                                          Colors.grey, BlendMode.saturation),
-                                      child: Image(
-                                        image: const NetworkImage(
-                                          "https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D",
-                                        ),
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          print("Error loading image: $error");
-                                          return const Text("Error loading image");
-                                        },
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                Column(
-                                  children: [
-                                    Container(
-                                      margin: const EdgeInsets.only(bottom: 20),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10, horizontal: 15),
-                                      decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      child: Text(
-                                        "BENEFICIO 1",
-                                        style: GoogleFonts.quicksand(
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: const EdgeInsets.only(bottom: 20),
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10, horizontal: 15),
-                                      decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      child: Text(
-                                        "BENEFICIO 2",
-                                        style: GoogleFonts.quicksand(
-                                            color: Colors.white),
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
+            Container(
+              alignment: Alignment.centerLeft,
+              width: context.width,
+              child: NotificationListener(
+                onNotification: (notification) {
+                  // Puedes manejar eventos de desplazamiento aquí
+                  return false;
+                },
+                child: ListView.separated(
+                  controller: _scrollController,
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) =>
+                      const TipoTramiteWidget(),
+                  separatorBuilder: (_, __) => const SizedBox(
+                    width: 25,
+                  ),
+                  itemCount: 5,
+                ),
+              ),
+            ),
+            Positioned.fill(
+              child:  AnimatedOpacity(
+                opacity: _scrollController.position.,
+                duration: Duration(milliseconds: 300),
+                child: Container(
+                  margin: const EdgeInsets.only(
+                    left: 25,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          _scrollController.animateTo(
+                            0,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          onEnter: (_) => setState(() => isMouseOver2 = true),
+                          onExit: (_) => setState(() => isMouseOver2 = false),
+                          child: AnimatedContainer(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: isMouseOver2
+                                      ? Colors.orange
+                                      : Colors.white),
+                              padding: const EdgeInsets.all(15),
+                              duration: const Duration(milliseconds: 300),
+                              child: Icon(
+                                Icons.arrow_back,
+                                color: isMouseOver2 ? Colors.white : Colors.black,
+                              )),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const SizedBox(
-                  width: 30,
+            Positioned(
+              right: 0,
+              child: MouseRegion(
+                onEnter: (_) => setState(() => isMouseOver = true),
+                onExit: (_) => setState(() => isMouseOver = false),
+                cursor: SystemMouseCursors.click,
+                child: Container(
+                  height: context.height - 145,
+                  margin: const EdgeInsets.only(right: 25),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          _scrollController.animateTo(
+                            _scrollController.position.maxScrollExtent,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                        behavior: HitTestBehavior.translucent,
+                        child: AnimatedContainer(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color:
+                                    isMouseOver ? Colors.orange : Colors.white),
+                            padding: const EdgeInsets.all(15),
+                            duration: const Duration(milliseconds: 300),
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              color: isMouseOver ? Colors.white : Colors.black,
+                            )),
+                      ),
+                    ],
+                  ),
                 ),
-                Text(
-                  "Continuar",
-                  style:
-                      GoogleFonts.quicksand(color: Colors.black, fontSize: 25),
-                ),
-                const SizedBox(width: 20),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                      color: Colors.white, shape: BoxShape.circle),
-                  child: const Icon(Icons.arrow_forward, color: Colors.black),
-                )
-              ],
-            )
+              ),
+            ),
           ],
+        ));
+  }
+}
+
+class TipoTramiteWidget extends StatefulWidget {
+  const TipoTramiteWidget({
+    super.key,
+  });
+
+  @override
+  State<TipoTramiteWidget> createState() => _TipoTramiteWidgetState();
+}
+
+class _TipoTramiteWidgetState extends State<TipoTramiteWidget> {
+  bool enabled = false;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      child: MouseRegion(
+        hitTestBehavior: HitTestBehavior.translucent,
+        cursor: SystemMouseCursors.click,
+        onEnter: (e) {
+          setState(() {
+            enabled = true;
+          });
+        },
+        onExit: (e) {
+          setState(() {
+            enabled = false;
+          });
+        },
+        child: AnimatedContainer(
+          padding: const EdgeInsets.all(5),
+          decoration: BoxDecoration(
+              border: Border.all(
+                  color: Colors.orange.withOpacity(enabled ? 1 : 0), width: 5),
+              borderRadius: BorderRadius.circular(25)),
+          duration: const Duration(milliseconds: 200),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                        enabled ? Colors.transparent : Colors.grey,
+                        BlendMode.saturation),
+                    child: Image(
+                      image: const NetworkImage(
+                        "https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D",
+                      ),
+                      errorBuilder: (context, error, stackTrace) {
+                        print("Error loading image: $error");
+                        return const Text("Error loading image");
+                      },
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                width: 320,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    gradient: LinearGradient(
+                        end: Alignment.topCenter,
+                        begin: Alignment.bottomCenter,
+                        stops: const [.35, 1],
+                        colors: [Colors.black, Colors.black.withOpacity(.0)])),
+              ),
+              Container(
+                width: 320,
+                height: context.height - 180,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Mas informacion",
+                          style: GoogleFonts.quicksand(
+                              color: Colors.white,
+                              decoration: TextDecoration.underline),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    Text(
+                      "VISA PRIMERA VEZ",
+                      style:
+                          GoogleFonts.lato(color: Colors.white, fontSize: 30),
+                      overflow: TextOverflow.visible,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    StrokeText(
+                      text: "\$ 899.00",
+                      strokeColor: Colors.white,
+                      strokeWidth: 1,
+                      textColor: Colors.transparent,
+                      textStyle: GoogleFonts.roboto(
+                          color: Colors.transparent, fontSize: 50),
+                    ),
+                    Text(
+                      "*aplica restricciones",
+                      style: GoogleFonts.quicksand(
+                          color: Colors.grey, fontSize: 10),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.calendar_month,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Mas inforamacion",
+                          style: GoogleFonts.quicksand(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.calendar_month,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Mas inforamacion",
+                          style: GoogleFonts.quicksand(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.calendar_month,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Mas inforamacion",
+                          style: GoogleFonts.quicksand(color: Colors.white),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -56,19 +56,6 @@ class _LoginButtonState extends State<LoginButton> {
                   ),
                 ),
               ),
-              sizingInformation.isMobile
-                  ? Row(
-                      children: [
-                        Text(
-                          "Ingresar",
-                          style: GoogleFonts.quicksand(color: Colors.black),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        )
-                      ],
-                    )
-                  : Container(),
               GestureDetector(
                 onTap: () {
                   context.router.pushNamed('login');

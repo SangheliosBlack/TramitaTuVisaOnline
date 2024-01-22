@@ -23,7 +23,24 @@ class Aside extends StatelessWidget {
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 8),
+                          horizontal: 15, vertical: 7),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          border: Border.all(
+                            width: 1,
+                            color: Colors.black,
+                          )),
+                      child: Text(
+                        "Global Entry",
+                        style: GoogleFonts.quicksand(color: Colors.black),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 7),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           border: Border.all(
@@ -40,7 +57,7 @@ class Aside extends StatelessWidget {
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 8),
+                          horizontal: 15, vertical: 7),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           border: Border.all(
@@ -55,40 +72,9 @@ class Aside extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 8),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              border: Border.all(
-                                width: 1,
-                                color: Colors.black,
-                              )),
-                          child: Text(
-                            "Global Entry",
-                            style: GoogleFonts.quicksand(color: Colors.black),
-                          ),
-                        ),
-                        Container(
-                            margin: const EdgeInsets.only(left: 10),
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Colors.white),
-                            child: const Icon(
-                              Icons.bolt,
-                              size: 20,
-                            ))
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 8),
+                          horizontal: 15, vertical: 7),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           border: Border.all(
@@ -101,7 +87,7 @@ class Aside extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      height: 125,
+                      height: 80,
                       width: 2,
                       color: Colors.black.withOpacity(0),
                     ),

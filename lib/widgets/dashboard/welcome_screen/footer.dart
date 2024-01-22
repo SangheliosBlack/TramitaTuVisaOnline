@@ -16,42 +16,8 @@ class Footer extends StatelessWidget {
         ResponsiveBuilder(
           builder: (BuildContext context, SizingInformation sizingInformation) {
             return Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: sizingInformation.isMobile ? 15 : 20,
-                  vertical: sizingInformation.isMobile ? 10 : 20),
-              child: const Row(
-                children: [
-                  Icon(
-                    FontAwesomeIcons.ccMastercard,
-                    size: 35,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Icon(
-                    FontAwesomeIcons.ccVisa,
-                    size: 35,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Icon(
-                    FontAwesomeIcons.ccAmex,
-                    size: 35,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-        ResponsiveBuilder(
-          builder: (BuildContext context, SizingInformation sizingInformation) {
-            return Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: 30,
+                    horizontal: sizingInformation.isMobile ? 0 : 30,
                     vertical: sizingInformation.isMobile ? 10 : 20),
                 width: context.width,
                 decoration: const BoxDecoration(color: Colors.black),
@@ -89,6 +55,7 @@ class Footer extends StatelessWidget {
                               SizedBox(
                                 width: context.width,
                                 child: const SingleChildScrollView(
+                                  physics: BouncingScrollPhysics(),
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
                                     children: [

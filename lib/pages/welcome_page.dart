@@ -64,8 +64,10 @@ class _DashboardPageState extends State<WelcomePage> {
                           175, 178, 179, sizingInformation.isMobile ? .7 : 1)
                     ])),
               )),
-              const Positioned.fill(child: AutoRouter()),
-              const Header(),
+              const Positioned.fill(
+                  child: Column(
+                children: [Header(), Expanded(child: AutoRouter()), Footer()],
+              )),
               const Positioned(
                 top: 0,
                 child: Row(
@@ -78,7 +80,6 @@ class _DashboardPageState extends State<WelcomePage> {
                 height: context.height,
                 width: context.width,
               ),
-              const Positioned(bottom: 0, child: Footer()),
             ],
           ),
         ));
