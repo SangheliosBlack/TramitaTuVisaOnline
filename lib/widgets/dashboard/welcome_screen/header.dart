@@ -89,7 +89,6 @@ class _OptionState extends State<Option> {
     return GestureDetector(
       onTap: () {
         context.router.pushNamed(widget.url);
-       
       },
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
@@ -110,14 +109,13 @@ class _OptionState extends State<Option> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(enabled ? 1 : 0),
+                    color: Colors.black.withOpacity(1),
                     border: Border.all(color: Colors.black.withOpacity(.1)),
                     borderRadius: BorderRadius.circular(100)),
                 duration: const Duration(milliseconds: 400),
                 child: Text(
                   widget.titulo,
-                  style: GoogleFonts.quicksand(
-                      color: enabled ? Colors.white : Colors.black),
+                  style: GoogleFonts.quicksand(color: Colors.white),
                 )),
             Positioned(
               right: 0,

@@ -16,6 +16,7 @@ class _VisaRenovacionPageState extends State<VisaRenovacionPage> {
   late ScrollController _scrollController;
   bool isMouseOver = false;
   bool isMouseOver2 = false;
+  double opacity = 0.0;
 
   @override
   void initState() {
@@ -23,12 +24,10 @@ class _VisaRenovacionPageState extends State<VisaRenovacionPage> {
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       setState(() {
-        // Calcula la opacidad basada en la posición actual del ScrollController
-        double opacity = (_scrollController.offset / 100).clamp(0.0, 1.0);
-        // Actualiza la opacidad solo si el widget está visible
-        if (opacity >= 0.0 && opacity <= 1.0) {
-          _opacity = opacity;
-        }
+        opacity = _scrollController.offset == 0
+            ? 0.0
+            : (_scrollController.offset / 100).clamp(0.0, 1.0);
+        print(opacity);
       });
     });
   }
@@ -41,6 +40,8 @@ class _VisaRenovacionPageState extends State<VisaRenovacionPage> {
 
   @override
   Widget build(BuildContext context) {
+    final path = context.router.currentPath.split("/")[1];
+
     return Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(
@@ -70,9 +71,9 @@ class _VisaRenovacionPageState extends State<VisaRenovacionPage> {
               ),
             ),
             Positioned.fill(
-              child:  AnimatedOpacity(
-                opacity: _scrollController.position.,
-                duration: Duration(milliseconds: 300),
+              child: AnimatedOpacity(
+                opacity: opacity,
+                duration: const Duration(milliseconds: 300),
                 child: Container(
                   margin: const EdgeInsets.only(
                     left: 25,
@@ -103,7 +104,8 @@ class _VisaRenovacionPageState extends State<VisaRenovacionPage> {
                               duration: const Duration(milliseconds: 300),
                               child: Icon(
                                 Icons.arrow_back,
-                                color: isMouseOver2 ? Colors.white : Colors.black,
+                                color:
+                                    isMouseOver2 ? Colors.white : Colors.black,
                               )),
                         ),
                       ),
@@ -114,39 +116,45 @@ class _VisaRenovacionPageState extends State<VisaRenovacionPage> {
             ),
             Positioned(
               right: 0,
-              child: MouseRegion(
-                onEnter: (_) => setState(() => isMouseOver = true),
-                onExit: (_) => setState(() => isMouseOver = false),
-                cursor: SystemMouseCursors.click,
-                child: Container(
-                  height: context.height - 145,
-                  margin: const EdgeInsets.only(right: 25),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          _scrollController.animateTo(
-                            _scrollController.position.maxScrollExtent,
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.easeInOut,
-                          );
-                        },
-                        behavior: HitTestBehavior.translucent,
-                        child: AnimatedContainer(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
+              child: AnimatedOpacity(
+                opacity: opacity == 1 ? 0 : 1,
+                duration: const Duration(milliseconds: 300),
+                child: MouseRegion(
+                  onEnter: (_) => setState(() => isMouseOver = true),
+                  onExit: (_) => setState(() => isMouseOver = false),
+                  cursor: SystemMouseCursors.click,
+                  child: Container(
+                    height: context.height - 145,
+                    margin: const EdgeInsets.only(right: 25),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            _scrollController.animateTo(
+                              _scrollController.position.maxScrollExtent,
+                              duration: const Duration(seconds: 1),
+                              curve: Curves.easeInOut,
+                            );
+                          },
+                          behavior: HitTestBehavior.translucent,
+                          child: AnimatedContainer(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: isMouseOver
+                                      ? Colors.orange
+                                      : Colors.white),
+                              padding: const EdgeInsets.all(15),
+                              duration: const Duration(milliseconds: 300),
+                              child: Icon(
+                                Icons.arrow_forward_ios,
                                 color:
-                                    isMouseOver ? Colors.orange : Colors.white),
-                            padding: const EdgeInsets.all(15),
-                            duration: const Duration(milliseconds: 300),
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: isMouseOver ? Colors.white : Colors.black,
-                            )),
-                      ),
-                    ],
+                                    isMouseOver ? Colors.white : Colors.black,
+                              )),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -214,7 +222,7 @@ class _TipoTramiteWidgetState extends State<TipoTramiteWidget> {
                 ),
               ),
               Container(
-                width: 320,
+                width: context.width / 3,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     gradient: LinearGradient(
@@ -224,7 +232,7 @@ class _TipoTramiteWidgetState extends State<TipoTramiteWidget> {
                         colors: [Colors.black, Colors.black.withOpacity(.0)])),
               ),
               Container(
-                width: 320,
+                width: context.width / 3,
                 height: context.height - 180,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(

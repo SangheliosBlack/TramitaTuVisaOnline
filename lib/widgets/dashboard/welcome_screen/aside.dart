@@ -87,7 +87,7 @@ class Aside extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      height: 80,
+                      height: 20,
                       width: 2,
                       color: Colors.black.withOpacity(0),
                     ),
