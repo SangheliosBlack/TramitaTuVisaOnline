@@ -37,7 +37,7 @@ class TopLayout extends StatelessWidget {
                               fontSize: 30),
                         );
                       }
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     },
                   ),
                 ],

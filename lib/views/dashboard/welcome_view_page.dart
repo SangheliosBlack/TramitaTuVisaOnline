@@ -144,6 +144,38 @@ class _DashBoardDefaultViewState extends State<WelcomeViewPage> {
                         fit: BoxFit.fitHeight,
                       ),
                     )),
+                sizingInformation.isMobile
+                    ? Positioned(
+                        right: 20,
+                        bottom: 20,
+                        child: GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: () {
+                            context.router.pushNamed('visa_renovacion');
+                          },
+                          child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              decoration: const BoxDecoration(color: Colors.black),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "INICIAR",
+                                    style: GoogleFonts.quicksand(
+                                        color: Colors.white),
+                                  ),
+                                  const SizedBox(
+                                    width: 15,
+                                  ),
+                                  const Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              )),
+                        ),
+                      )
+                    : Container()
               ],
             ));
       },

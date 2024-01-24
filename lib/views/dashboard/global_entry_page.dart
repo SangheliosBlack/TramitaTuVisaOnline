@@ -71,7 +71,6 @@ class GlobalEntryPage
                                         ),
                                         errorBuilder:
                                             (context, error, stackTrace) {
-                                          print("Error loading image: $error");
                                           return const Text("Error loading image");
                                         },
                                         fit: BoxFit.cover,

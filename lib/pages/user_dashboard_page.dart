@@ -36,7 +36,7 @@ class _DashboardPageState extends State<UserDashboardPage> {
         }
       },
       child: Scaffold(
-          backgroundColor: Color.fromRGBO(2, 2, 2, 1),
+          backgroundColor: const Color.fromRGBO(2, 2, 2, 1),
           body: Row(
             children: [
               const AsideLayout(),

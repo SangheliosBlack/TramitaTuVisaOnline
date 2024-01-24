@@ -27,7 +27,6 @@ class _VisaRenovacionPageState extends State<VisaRenovacionPage> {
         opacity = _scrollController.offset == 0
             ? 0.0
             : (_scrollController.offset / 100).clamp(0.0, 1.0);
-        print(opacity);
       });
     });
   }
@@ -213,7 +212,6 @@ class _TipoTramiteWidgetState extends State<TipoTramiteWidget> {
                         "https://images.unsplash.com/photo-1605833556294-ea5c7a74f57d?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D",
                       ),
                       errorBuilder: (context, error, stackTrace) {
-                        print("Error loading image: $error");
                         return const Text("Error loading image");
                       },
                       fit: BoxFit.cover,
@@ -279,53 +277,87 @@ class _TipoTramiteWidgetState extends State<TipoTramiteWidget> {
                       height: 20,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Icon(
-                          Icons.calendar_month,
-                          color: Colors.white,
-                          size: 16,
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.calendar_month,
+                                  color: Colors.white,
+                                  size: 16,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Mas inforamacion",
+                                  style: GoogleFonts.quicksand(
+                                      color: Colors.white),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.calendar_month,
+                                  color: Colors.white,
+                                  size: 16,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Mas inforamacion",
+                                  style: GoogleFonts.quicksand(
+                                      color: Colors.white),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.calendar_month,
+                                  color: Colors.white,
+                                  size: 16,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Mas inforamacion",
+                                  style: GoogleFonts.quicksand(
+                                      color: Colors.white),
+                                )
+                              ],
+                            ),
+                          ],
                         ),
-                        const SizedBox(
-                          width: 10,
+                        AnimatedOpacity(
+                          duration: const Duration(milliseconds: 300),
+                          opacity: enabled ? 1 : 0,
+                          child: GestureDetector(
+                            behavior: HitTestBehavior.translucent,
+                            onTap: enabled
+                                ? () {
+                                    context.router.pushNamed('login');
+                                  }
+                                : null,
+                            child: AnimatedContainer(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: Colors.white),
+                                padding: const EdgeInsets.all(10),
+                                duration: const Duration(milliseconds: 300),
+                                child: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.black,
+                                )),
+                          ),
                         ),
-                        Text(
-                          "Mas inforamacion",
-                          style: GoogleFonts.quicksand(color: Colors.white),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.calendar_month,
-                          color: Colors.white,
-                          size: 16,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Mas inforamacion",
-                          style: GoogleFonts.quicksand(color: Colors.white),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.calendar_month,
-                          color: Colors.white,
-                          size: 16,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Mas inforamacion",
-                          style: GoogleFonts.quicksand(color: Colors.white),
-                        )
                       ],
                     )
                   ],
