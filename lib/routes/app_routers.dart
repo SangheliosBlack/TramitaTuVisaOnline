@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 
 import 'package:skeleton/pages/pages.dart';
 import 'package:skeleton/views/admin/home_view_page.dart';
+import 'package:skeleton/views/admin/plataforma_page.dart';
 import 'package:skeleton/views/views.dart';
 
 part 'app_routers.gr.dart';
@@ -30,6 +31,24 @@ class AppRouter extends _$AppRouter {
                 durationInMilliseconds: 100,
                 initial: true,
                 path: ''),
+            CustomRoute(
+                page: PlataformaRoute.page,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                reverseDurationInMilliseconds: 100,
+                durationInMilliseconds: 100,
+                path: 'plataforma'),
+            CustomRoute(
+                page: AdministracionRoute.page,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                reverseDurationInMilliseconds: 100,
+                durationInMilliseconds: 100,
+                path: 'administracion'),
+            CustomRoute(
+                page: ReferidosRoute.page,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                reverseDurationInMilliseconds: 100,
+                durationInMilliseconds: 100,
+                path: 'referidos'),
           ],
           path: "/dashboard",
         ),
@@ -46,7 +65,7 @@ class AppRouter extends _$AppRouter {
                   durationInMilliseconds: 100,
                   path: 'login'),
               CustomRoute(
-                initial: true,
+                  initial: true,
                   page: WelcomeViewRoute.page,
                   transitionsBuilder: TransitionsBuilders.fadeIn,
                   reverseDurationInMilliseconds: 100,

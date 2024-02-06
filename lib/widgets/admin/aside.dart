@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skeleton/config/global.dart';
 import 'package:skeleton/widgets/admin/aside_option.dart';
@@ -17,9 +16,10 @@ class _AsideLayoutState extends State<AsideLayout> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSize(
+      reverseDuration: const Duration(milliseconds: 200),
       duration: const Duration(milliseconds: 200),
       child: SizedBox(
-        width: isOpen ? 280 : 100,
+        width: isOpen ? 280 : 90,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: Column(
@@ -102,41 +102,60 @@ class _AsideLayoutState extends State<AsideLayout> {
                         children: [
                           Row(
                             children: [
-                              const Icon(
-                                Icons.search,
-                                color: Colors.grey,
+                              Container(
+                                padding: const EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    border: Border.all(
+                                        width: 1,
+                                        color: Colors.grey.withOpacity(.4))),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: const SizedBox(
+                                    height: 35,
+                                    width: 35,
+                                    child: Image(
+                                      image: NetworkImage(
+                                          "https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg"),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
                               ),
                               const SizedBox(
-                                width: 8,
+                                width: 10,
                               ),
-                              Text(
-                                "Buscar aqui",
-                                style: GoogleFonts.quicksand(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Julio Villagrana",
+                                    style: GoogleFonts.quicksand(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Desarrollador",
+                                    style: GoogleFonts.quicksand(
+                                        color: Colors.grey, fontSize: 12),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 5),
+                                horizontal: 10, vertical: 10),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: const Color.fromRGBO(2, 2, 2, 1)),
-                            child: Row(
+                            child: const Row(
                               children: [
-                                const FaIcon(
-                                  FontAwesomeIcons.windows,
+                                Icon(
+                                  Icons.arrow_forward_rounded,
                                   color: Colors.white,
-                                  size: 15,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "S",
-                                  style: GoogleFonts.quicksand(
-                                      color: Colors.white),
+                                  size: 13,
                                 ),
                               ],
                             ),
@@ -169,7 +188,7 @@ class _AsideLayoutState extends State<AsideLayout> {
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.white),
                       child: const Icon(
-                        Icons.search,
+                        Icons.person,
                         color: Colors.grey,
                       ),
                     ),

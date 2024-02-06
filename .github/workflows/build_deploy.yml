@@ -56,7 +56,7 @@ jobs:
           path: /tmp/my_build
 
       - name: Copy build to server repository
-        run: cp -r /tmp/my_build/. server/public
+        run: cp -r /tmp/my_build/. server/src/public
 
       - name: Commit and Push to Server Repository
         run: |

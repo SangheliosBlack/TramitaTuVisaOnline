@@ -10,16 +10,16 @@ class Statics {
       "Global Entry",
       "Pasaporte Mexicano"
     ]),
-    MenuOption(titulo: "Tiempos de espera", icono: Icons.route, subMenu: []),
-    MenuOption(
-      titulo: "Clientes",
-      icono: Icons.diversity_3,
-      subMenu: [],
-    ),
     MenuOption(
       titulo: "Usuarios",
       icono: Icons.public,
-      subMenu: ["Referidos", "Sistema"],
-    )
+      subMenu: ["Administracion", "Plataforma"],
+    ),
+    MenuOption(titulo: "Tiempos de espera", icono: Icons.route, subMenu: []),
+    MenuOption(
+      titulo: "Referidos",
+      icono: Icons.diversity_3,
+      subMenu: [],
+    ),
   ];
 }

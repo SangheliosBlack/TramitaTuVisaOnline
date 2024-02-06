@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hovering/hovering.dart';
@@ -15,9 +16,8 @@ class AsideOptionWidget extends StatefulWidget {
   State<AsideOptionWidget> createState() => _AsideOptionWidgetState();
 }
 
-bool selected = false;
-
 class _AsideOptionWidgetState extends State<AsideOptionWidget> {
+  bool selected = false;
   @override
   Widget build(BuildContext context) {
     return widget.isOpen
@@ -25,7 +25,10 @@ class _AsideOptionWidgetState extends State<AsideOptionWidget> {
             children: [
               GestureDetector(
                 onTap: widget.menuOption.subMenu.isEmpty
-                    ? null
+                    ? () {
+                        context.router
+                            .pushNamed(widget.menuOption.titulo.toLowerCase());
+                      }
                     : () {
                         setState(() {
                           selected = !selected;
@@ -72,7 +75,8 @@ class _AsideOptionWidgetState extends State<AsideOptionWidget> {
                 ),
               ),
               AnimatedSize(
-                duration: const Duration(milliseconds: 300),
+                reverseDuration: const Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 200),
                 child: selected
                     ? Column(
                         children: [

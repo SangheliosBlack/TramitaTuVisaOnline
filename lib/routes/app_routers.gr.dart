@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AdministracionRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AdministracionPage(),
+      );
+    },
     GlobalEntryRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -37,6 +43,18 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const PasaportePage(),
+      );
+    },
+    PlataformaRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PlataformaPage(),
+      );
+    },
+    ReferidosRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ReferidosPage(),
       );
     },
     SplashRoute.name: (routeData) {
@@ -76,6 +94,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [AdministracionPage]
+class AdministracionRoute extends PageRouteInfo<void> {
+  const AdministracionRoute({List<PageRouteInfo>? children})
+      : super(
+          AdministracionRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AdministracionRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -130,6 +162,34 @@ class PasaporteRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'PasaporteRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PlataformaPage]
+class PlataformaRoute extends PageRouteInfo<void> {
+  const PlataformaRoute({List<PageRouteInfo>? children})
+      : super(
+          PlataformaRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PlataformaRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ReferidosPage]
+class ReferidosRoute extends PageRouteInfo<void> {
+  const ReferidosRoute({List<PageRouteInfo>? children})
+      : super(
+          ReferidosRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ReferidosRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

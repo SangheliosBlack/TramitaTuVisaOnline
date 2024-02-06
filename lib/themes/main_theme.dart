@@ -11,11 +11,7 @@ class Themes {
     appBarTheme: const AppBarTheme(
         elevation: 0, color: Colors.white, foregroundColor: Colors.grey),
     scaffoldBackgroundColor: Colors.white,
-    
     textTheme: TextTheme(
-
-      
-
         titleLarge: GoogleFonts.quicksand(
           color: primaryTitle,
           fontSize: 18,
@@ -47,19 +43,21 @@ class Themes {
             fontWeight: FontWeight.normal,
             overflow: TextOverflow.ellipsis)),
     inputDecorationTheme: InputDecorationTheme(
+      
       filled: true,
       isDense: true,
+      helperStyle: GoogleFonts.quicksand(color: Colors.black.withOpacity(.8)),
       floatingLabelBehavior: FloatingLabelBehavior.always,
-      fillColor: Colors.grey.withOpacity(.01),
+      fillColor: Colors.grey.withOpacity(0),
       focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.grey.withOpacity(.1), width: 2)),
+          borderSide: BorderSide(color: Colors.grey.withOpacity(.5), width: 2)),
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.grey.withOpacity(.1))),
+          borderSide: BorderSide(color: Colors.grey.withOpacity(.5))),
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.grey.withOpacity(.1))),
+          borderSide: BorderSide(color: Colors.grey.withOpacity(.5))),
       contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 17),
       errorStyle: GoogleFonts.quicksand(color: Colors.red),
       hintStyle: GoogleFonts.quicksand(color: Colors.grey.withOpacity(.7)),

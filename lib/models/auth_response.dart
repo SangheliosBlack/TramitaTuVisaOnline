@@ -2,13 +2,12 @@ import 'dart:convert';
 
 import 'package:skeleton/helpers/service_message.dart';
 
-
 class AuthResponse<T> {
-  AuthResponse(
-      {required this.status,
-      required this.message,
-      this.usuario,
-      });
+  AuthResponse({
+    required this.status,
+    required this.message,
+    this.usuario,
+  });
 
   String status;
   String message;
@@ -16,11 +15,10 @@ class AuthResponse<T> {
 }
 
 class AuthRSuccess<T> extends AuthResponse<T> {
-  AuthRSuccess(
-      {String message = ServiceMessages.messageSuccess,
-      Usuario? usuario,
-      })
-      : super(
+  AuthRSuccess({
+    String message = ServiceMessages.messageSuccess,
+    Usuario? usuario,
+  }) : super(
           status: ServiceMessages.success,
           message: message,
           usuario: usuario,
@@ -39,7 +37,9 @@ class AuthRError<T> extends AuthResponse<T> {
 }
 
 Usuario usuarioFromJson(String str) => Usuario.fromJson(json.decode(str));
-
+List<Usuario> listUsuarioFromJson(List<dynamic> jsonList){
+  return jsonList.map((json) => Usuario.fromJson(json)  ).toList();
+}
 
 class Usuario {
   String id;
@@ -47,22 +47,21 @@ class Usuario {
   String phone;
   String name;
   String role;
+  DateTime createAt;
 
-  Usuario({
-    required this.id,
-    required this.email,
-    required this.name,
-    required this.phone,
-    required this.role
-  });
+  Usuario(
+      {required this.id,
+      required this.email,
+      required this.name,
+      required this.createAt,
+      required this.phone,
+      required this.role});
 
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
-    role:json["role"],
-        id: json["id"],
+        role: json["role"],
+        id: json["id"] ?? json["uid"],
         email: json["email"],
         phone: json["phone"],
-         name: json["name"],
+        name: json["name"], createAt: DateTime.parse(json["createdAt"]),
       );
-
 }
-
