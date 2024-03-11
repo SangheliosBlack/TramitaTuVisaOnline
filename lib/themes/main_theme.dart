@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Themes {
-  static Color primary = const Color(0xFF101214);
+  static Color primary = Colors.black;
   static Color primaryLight = Colors.grey.shade300;
   static Color primaryTitle = Colors.grey.shade600;
   static Color primaryBody = Colors.grey.shade400;
-  static Color secondary = const Color(0xFF87DB1C);
+  static Color secondary = const Color.fromRGBO(239, 240, 255, 1);
   static ThemeData appTheme = ThemeData(
     appBarTheme: const AppBarTheme(
         elevation: 0, color: Colors.white, foregroundColor: Colors.grey),
@@ -43,10 +43,9 @@ class Themes {
             fontWeight: FontWeight.normal,
             overflow: TextOverflow.ellipsis)),
     inputDecorationTheme: InputDecorationTheme(
-      
       filled: true,
       isDense: true,
-      helperStyle: GoogleFonts.quicksand(color: Colors.black.withOpacity(.8)),
+      helperStyle: GoogleFonts.quicksand(color: Colors.blueGrey),
       floatingLabelBehavior: FloatingLabelBehavior.always,
       fillColor: Colors.grey.withOpacity(0),
       focusedBorder: OutlineInputBorder(

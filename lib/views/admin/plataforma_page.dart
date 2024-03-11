@@ -1,16 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:skeleton/blocs/all_users/all_users_bloc.dart';
-import 'package:skeleton/helpers/avatar_color.dart';
+import 'package:skeleton/blocs/usuarios/usuarios_bloc.dart';
 import 'package:skeleton/helpers/avatar_letters.dart';
 import 'package:skeleton/helpers/dates.dart';
+import 'package:skeleton/helpers/extensions.dart';
 import 'package:skeleton/helpers/mask_phone.dart';
-import 'package:skeleton/models/auth_response.dart';
+import 'package:skeleton/models/user.dart';
 import 'package:skeleton/themes/main_theme.dart';
+import 'package:skeleton/widgets/admin/menus/all_user_menu.dart';
 
 @RoutePage()
 class PlataformaPage extends StatelessWidget {
@@ -18,45 +21,124 @@ class PlataformaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AllUsersBloc allUsersBloc = BlocProvider.of<AllUsersBloc>(context);
+    final UsersBloc usersBloc = BlocProvider.of<UsersBloc>(context);
+
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.only(top: 10, right: 5),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
               children: [
-                Text(
-                  "Usuarios Plataforma",
-                  style:
-                      GoogleFonts.quicksand(color: Colors.black, fontSize: 30),
-                ),
-                Row(
-                  children: [
-                    Container(
-                      width: 200,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 14),
-                      decoration: BoxDecoration(
-                          color: Themes.primary,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Row(
+                Container(
+                  padding: const EdgeInsets.only(top: 15, right: 0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
                           Text(
-                            "Buscar",
+                            "Plataforma",
                             style: GoogleFonts.quicksand(
-                              color: Colors.white,
+                                color: Colors.black, fontSize: 25),
+                          ),
+                          const Gap(1),
+                          Text(
+                            "23 documentos",
+                            style: GoogleFonts.quicksand(
+                                color: Colors.blueGrey, fontSize: 13),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: const Color.fromRGBO(66, 84, 237, 1)),
+                            child: Text(
+                              "Nuevo tramite",
+                              style: GoogleFonts.quicksand(color: Colors.white),
                             ),
                           )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                const Gap(15),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: context.width,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 20),
+                        decoration: BoxDecoration(
+                            color: Themes.secondary,
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                bottomLeft: Radius.circular(30),
+                                topRight: Radius.circular(10),
+                                bottomRight: Radius.circular(10))),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              BootstrapIcons.search,
+                              color: Colors.black,
+                              size: 20,
+                            ),
+                            Expanded(
+                                child: Center(
+                              child: TextFormField(
+                                style:
+                                    GoogleFonts.quicksand(color: Colors.black),
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 13, vertical: 13),
+                                  fillColor: Colors.transparent,
+                                  filled: false,
+                                  focusColor: Colors.transparent,
+                                  hintText: "Buscar...",
+                                  hintStyle: GoogleFonts.quicksand(
+                                      color: Colors.black),
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  isDense: true,
+                                  enabledBorder: InputBorder.none,
+                                ),
+                              ),
+                            )),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(9),
+                      decoration: BoxDecoration(
+                          color: Themes.secondary,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Filtrar",
+                            style: GoogleFonts.quicksand(color: Colors.black),
+                          ),
+                          const Gap(5),
+                          const Icon(
+                            BootstrapIcons.filter,
+                            color: Colors.black,
+                            size: 20,
+                          ),
                         ],
                       ),
                     ),
@@ -65,17 +147,18 @@ class PlataformaPage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        allUsersBloc.add(InitAllUsers());
+                        usersBloc.add(InitUsers());
                       },
                       behavior: HitTestBehavior.translucent,
                       child: Container(
-                        padding: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(9),
                         decoration: BoxDecoration(
-                            color: Themes.primary,
-                            borderRadius: BorderRadius.circular(15)),
+                            color: Themes.secondary,
+                            borderRadius: BorderRadius.circular(10)),
                         child: const Icon(
-                          Icons.sync,
-                          color: Colors.white,
+                          BootstrapIcons.arrow_clockwise,
+                          color: Colors.black,
+                          size: 20,
                         ),
                       ),
                     ),
@@ -83,190 +166,327 @@ class PlataformaPage extends StatelessWidget {
                       width: 5,
                     ),
                     Container(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(9),
                       decoration: BoxDecoration(
-                          color: Themes.primary,
-                          borderRadius: BorderRadius.circular(15)),
+                          color: Themes.secondary,
+                          borderRadius: BorderRadius.circular(10)),
                       child: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          color: Themes.primary,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: const Icon(
-                        BootstrapIcons.funnel,
-                        color: Colors.white,
+                        BootstrapIcons.cloud_download,
+                        color: Colors.black,
+                        size: 20,
                       ),
                     )
                   ],
-                )
+                ),
               ],
             ),
           ),
-          const Divider(),
           const SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    "Nombre",
-                    style: GoogleFonts.quicksand(
-                        fontWeight: FontWeight.w600, color: Colors.blueGrey),
-                  ),
-                  const SizedBox(
-                    width: 2,
-                  ),
-                  const Icon(
-                    Icons.unfold_more,
-                    color: Colors.grey,
-                    size: 20,
-                  )
-                ],
-              ),
-              const Spacer(),
-              Container(
-                margin: const EdgeInsets.only(right: 15),
-                width: 130,
-                child: Row(
-                  children: [
-                    Text(
-                      "Numero Celular",
-                      style: GoogleFonts.quicksand(
-                          fontWeight: FontWeight.w600, color: Colors.blueGrey),
-                    ),
-                    const SizedBox(
-                      width: 2,
-                    ),
-                    const Icon(
-                      Icons.unfold_more,
-                      color: Colors.grey,
-                      size: 20,
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(right: 15),
-                width: 220,
-                child: Row(
-                  children: [
-                    Text(
-                      "Correo",
-                      style: GoogleFonts.quicksand(
-                          fontWeight: FontWeight.w600, color: Colors.blueGrey),
-                    ),
-                    const SizedBox(
-                      width: 2,
-                    ),
-                    const Icon(
-                      Icons.unfold_more,
-                      color: Colors.grey,
-                      size: 20,
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: 150,
-                child: Row(
-                  children: [
-                    Text(
-                      "Fecha registro",
-                      style: GoogleFonts.quicksand(
-                          fontWeight: FontWeight.w600, color: Colors.blueGrey),
-                    ),
-                    const SizedBox(
-                      width: 2,
-                    ),
-                    const Icon(
-                      Icons.unfold_more,
-                      color: Colors.grey,
-                      size: 20,
-                    ),
-                    const Spacer()
-                  ],
-                ),
-              ),
-              Container(
-                width: 50,
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 10,
+            height: 5,
           ),
           Expanded(
-            child: BlocBuilder<AllUsersBloc, AllUsersState>(
-              builder: (context, state) {
-                ColorManager colorManager = ColorManager();
-                return AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 200),
-                  child: state is AllUsersLoading
-                      ? const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [CircularProgressIndicator()],
+            child: Container(
+              margin: const EdgeInsets.only(top: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 15),
+                    child: Row(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Nombre",
+                              style: GoogleFonts.quicksand(color: Colors.black),
+                            ),
+                            const SizedBox(
+                              width: 2,
+                            ),
+                            const Icon(
+                              Icons.unfold_more,
+                              color: Colors.blueGrey,
+                              size: 20,
+                            )
+                          ],
+                        ),
+                        const Spacer(),
+                        SizedBox(
+                          width: 270,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Ultima conexion",
+                                style:
+                                    GoogleFonts.quicksand(color: Colors.black),
+                              ),
+                              const SizedBox(
+                                width: 2,
+                              ),
+                              const Icon(
+                                Icons.unfold_more,
+                                color: Colors.blueGrey,
+                              )
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        SizedBox(
+                          width: 115,
+                          child: Row(
+                            children: [
+                              Text(
+                                "Telefono",
+                                style:
+                                    GoogleFonts.quicksand(color: Colors.black),
+                              ),
+                              const SizedBox(
+                                width: 2,
+                              ),
+                              const Icon(
+                                Icons.unfold_more,
+                                color: Colors.blueGrey,
+                              )
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        SizedBox(
+                          width: 120,
+                          child: Row(
+                            children: [
+                              Text(
+                                "Rol",
+                                style:
+                                    GoogleFonts.quicksand(color: Colors.black),
+                              ),
+                              const SizedBox(
+                                width: 2,
+                              ),
+                              const Icon(
+                                Icons.unfold_more,
+                                color: Colors.blueGrey,
+                                size: 20,
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 30,
                         )
-                      : state is AllUsersSuccess
-                          ? state.listUsers.isNotEmpty
-                              ? ListView.separated(
-                                  itemBuilder: (_, int i) {
-                                    final usuario = state.listUsers[i];
-
-                                    return UserWidget(
-                                      color: colorManager.avatarColor(i),
-                                      usuario: usuario,
-                                    );
-                                  },
-                                  separatorBuilder:
-                                      (BuildContext context, int index) =>
-                                          const SizedBox(
-                                    height: 10,
-                                  ),
-                                  itemCount: state.listUsers.length,
-                                )
-                              : Expanded(
-                                  child: Column(
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.grey.withOpacity(.1),
+                    height: 1,
+                  ),
+                  Expanded(
+                    child: BlocBuilder<UsersBloc, UsersState>(
+                      builder: (context, state) {
+                        return AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 200),
+                          child: state is UsersLoading
+                              ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      margin: const EdgeInsets.only(bottom: 20),
-                                      child: const Icon(
-                                        FontAwesomeIcons.faceSadTear,
-                                        size: 70,
-                                      ),
-                                    ),
-                                    Text(
-                                      "Nada que mostrar",
-                                      style: GoogleFonts.quicksand(
-                                          color: Colors.black, fontSize: 25),
+                                    CircularProgressIndicator(
+                                      color: Themes.primary,
                                     )
                                   ],
-                                ))
-                          : Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                  Text(
-                                    "Error desconocido",
-                                    style: GoogleFonts.quicksand(
-                                        color: Colors.black),
-                                  )
-                                ]),
-                );
-              },
+                                )
+                              : state is UsersSuccess
+                                  ? state.listUsers.isNotEmpty
+                                      ? Column(
+                                          children: [
+                                            Expanded(
+                                              child: ListView.separated(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 0,
+                                                        vertical: 0),
+                                                physics:
+                                                    const BouncingScrollPhysics(),
+                                                itemBuilder: (_, int i) {
+                                                  final usuario =
+                                                      state.listUsers[i];
+
+                                                  return UserWidgetFinal(
+                                                    color: usuario.online
+                                                        ? Colors.green
+                                                        : Colors.grey,
+                                                    usuario: usuario,
+                                                  );
+                                                },
+                                                separatorBuilder:
+                                                    (BuildContext context,
+                                                            int index) =>
+                                                        Divider(
+                                                  height: .5,
+                                                  color: Colors.grey
+                                                      .withOpacity(.1),
+                                                  thickness: 1,
+                                                ),
+                                                itemCount:
+                                                    state.listUsers.length,
+                                              ),
+                                            ),
+                                            Divider(
+                                              height: 0,
+                                              color:
+                                                  Colors.grey.withOpacity(.15),
+                                            ),
+                                            Container(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 15,
+                                                  left: 20,
+                                                  right: 20,
+                                                  top: 15),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    "Filas por hoja",
+                                                    style:
+                                                        GoogleFonts.quicksand(
+                                                            color:
+                                                                Colors.black),
+                                                  ),
+                                                  Container(
+                                                    margin: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 20),
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 15,
+                                                        vertical: 0),
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            width: 1,
+                                                            color: Colors.grey
+                                                                .withOpacity(
+                                                                    .2)),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15)),
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          state.listUsers.length
+                                                              .toString(),
+                                                          style: GoogleFonts
+                                                              .quicksand(
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                        const Icon(
+                                                          Icons.arrow_drop_down,
+                                                          color: Colors.black,
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    "1 - ${state.listUsers.length}",
+                                                    style:
+                                                        GoogleFonts.quicksand(
+                                                            color:
+                                                                Colors.black),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 25,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      const Icon(
+                                                        Icons.chevron_left,
+                                                        color: Colors.grey,
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      const Icon(
+                                                        Icons
+                                                            .keyboard_double_arrow_left,
+                                                        color: Colors.grey,
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Icon(Icons.chevron_right,
+                                                          color:
+                                                              Themes.primary),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Icon(
+                                                        Icons
+                                                            .keyboard_double_arrow_right,
+                                                        color: Themes.primary,
+                                                      )
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      : Expanded(
+                                          child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              margin: const EdgeInsets.only(
+                                                  bottom: 20),
+                                              child: const Icon(
+                                                FontAwesomeIcons.faceSadTear,
+                                                size: 70,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Nada que mostrar",
+                                              style: GoogleFonts.quicksand(
+                                                  color: Colors.white,
+                                                  fontSize: 25),
+                                            )
+                                          ],
+                                        ))
+                                  : Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                          Text(
+                                            "Error desconocido",
+                                            style: GoogleFonts.quicksand(
+                                                color: Colors.black),
+                                          )
+                                        ]),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -275,82 +495,145 @@ class PlataformaPage extends StatelessWidget {
   }
 }
 
-class UserWidget extends StatelessWidget {
+class UserWidgetFinal extends StatefulWidget {
   final Usuario usuario;
   final Color color;
-  const UserWidget({
+  const UserWidgetFinal({
     super.key,
     required this.color,
     required this.usuario,
   });
 
   @override
+  State<UserWidgetFinal> createState() => _UserWidgetFinalState();
+}
+
+class _UserWidgetFinalState extends State<UserWidgetFinal> {
+  bool hover = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Row(
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (e) {
+        setState(() {
+          hover = true;
+        });
+      },
+      onExit: (e) {
+        setState(() {
+          hover = false;
+        });
+      },
+      child: AnimatedContainer(
+        decoration:
+            BoxDecoration(color: Themes.secondary.withOpacity(hover ? .3 : 0)),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        duration: const Duration(milliseconds: 200),
+        child: Row(
           children: [
+            Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  height: 32,
+                  width: 32,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Themes.primary),
+                  child: Center(
+                    child: Text(
+                      avatarLetters(name: widget.usuario.name),
+                      style: GoogleFonts.quicksand(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  child: Text(
+                    widget.usuario.name,
+                    style: GoogleFonts.quicksand(color: Colors.black),
+                  ),
+                ),
+              ],
+            ),
+            const Spacer(),
             Container(
-              margin: const EdgeInsets.only(right: 10),
-              height: 32,
-              width: 32,
-              decoration: BoxDecoration(
-                  border: Border.all(width: .2, color: color.withOpacity(.6)),
-                  borderRadius: BorderRadius.circular(12),
-                  color: color.withOpacity(.1)),
-              child: Center(
-                child: Text(
-                  avatarLetters(name: usuario.name),
-                  style: GoogleFonts.quicksand(
-                      color: color, fontSize: 15, fontWeight: FontWeight.w600),
+              margin: const EdgeInsets.only(right: 20),
+              width: 270,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    dateTimeParse(date: widget.usuario.lastConnection),
+                    style: GoogleFonts.quicksand(color: Colors.black),
+                  ),
+                  Text(
+                    obtenerTiempoTranscurrido(
+                        date: widget.usuario.lastConnection),
+                    style: GoogleFonts.quicksand(color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(right: 20),
+              width: 115,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    formatPhone(numero: widget.usuario.phone),
+                    style: GoogleFonts.quicksand(color: Colors.black),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(right: 15),
+              width: 120,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    height: 25,
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.blueGrey,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Usuario",
+                        style: GoogleFonts.quicksand(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ExampleMenuAllUser(
+              builder: (_, showMenu) => CupertinoButton(
+                onPressed: showMenu,
+                padding: EdgeInsets.zero,
+                pressedOpacity: 1,
+                child: const Icon(
+                  BootstrapIcons.three_dots,
+                  color: Colors.black,
                 ),
               ),
-            ),
-            Text(
-              usuario.name,
-              style: GoogleFonts.quicksand(
-                  color: Colors.black, fontWeight: FontWeight.w600),
-            ),
+              usuario: widget.usuario,
+              color: widget.color,
+            )
           ],
         ),
-        const Spacer(),
-        Container(
-          margin: const EdgeInsets.only(right: 15),
-          width: 130,
-          child: Row(
-            children: [
-              Text(
-                formatPhone(numero: usuario.phone),
-                style: GoogleFonts.quicksand(
-                    color: Colors.black, fontWeight: FontWeight.w600),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(right: 15),
-          width: 220,
-          child: Text(
-            usuario.email,
-            style: GoogleFonts.quicksand(
-                color: Colors.black, fontWeight: FontWeight.w600),
-          ),
-        ),
-        SizedBox(
-          width: 150,
-          child: Row(
-            children: [
-              Text(
-                dateTimeParse(date: usuario.createAt),
-                style: GoogleFonts.quicksand(
-                    color: Colors.black, fontWeight: FontWeight.w600),
-              ),
-              const Spacer()
-            ],
-          ),
-        ),
-        const SizedBox(width: 50, child: Icon(Icons.more_horiz))
-      ],
+      ),
     );
   }
 }

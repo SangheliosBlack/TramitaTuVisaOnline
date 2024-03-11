@@ -38,6 +38,10 @@ dependencies:
   flutter_dotenv: ^5.1.0
   intl: ^0.18.1
   bootstrap_icons: ^1.11.3
+  dropdown_button2: ^2.3.9
+  gap: ^3.0.1
+  pull_down_button: ^0.9.3
+  simple_circular_progress_bar: ^1.0.2
 
 dev_dependencies:
   build_runner: ^2.4.5

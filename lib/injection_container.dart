@@ -1,6 +1,4 @@
-
 import 'package:get_it/get_it.dart';
-import 'package:skeleton/blocs/all_users/all_users_bloc.dart';
 import 'package:skeleton/blocs/auth_bloc/auth_bloc.dart';
 import 'package:skeleton/blocs/referred/referred_bloc.dart';
 import 'package:skeleton/blocs/usuarios/usuarios_bloc.dart';
@@ -10,11 +8,12 @@ import 'package:skeleton/services/http_service.dart';
 
 final sl = GetIt.I;
 
-Future<void> initLocator() async{
+Future<void> initLocator() async {
   //*BLOCs
   sl.registerFactory(() => AuthBloc(authRepository: sl()));
-  sl.registerFactory(() => AllUsersBloc(usuariosPlataformaRepository: sl()));
-  sl.registerFactory(() => UsuariosPlataformaBloc(usuariosPlataformaRepository: sl()));
+  
+  sl.registerFactory(
+      () => UsersBloc(usuariosPlataformaRepository: sl()));
   sl.registerFactory(() => ReferredBloc(usuariosRepository: sl()));
   //*REPOSITORIEs
   sl.registerFactory(() => AuthRepository(httpService: sl()));

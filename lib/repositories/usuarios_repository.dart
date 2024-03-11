@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:skeleton/models/auth_response.dart';
 import 'package:skeleton/models/general_response.dart';
+import 'package:skeleton/models/user.dart';
 import 'package:skeleton/services/http_service.dart';
 
 class UsuariosRepository {
@@ -31,7 +31,8 @@ class UsuariosRepository {
       return ResponseError(message: 'Unknow error');
     }
   }
-  Future<GeneralResponse> getAllUsers() async {
+
+  Future<GeneralResponse> getUsers() async {
     try {
       final response = await httpService.get(
         path: '/users',
@@ -53,6 +54,7 @@ class UsuariosRepository {
       return ResponseError(message: 'Unknow error');
     }
   }
+
   Future<GeneralResponse> getReferredUsers() async {
     try {
       final response = await httpService.get(

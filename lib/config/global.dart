@@ -1,10 +1,10 @@
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:skeleton/models/menu_option_model.dart';
-import 'package:flutter/material.dart';
 
 class Statics {
   static List<MenuOption> listMenuOptions = [
-    MenuOption(titulo: "Home", icono: Icons.dashboard, subMenu: []),
-    MenuOption(titulo: "Tramites", icono: Icons.description, subMenu: [
+    MenuOption(titulo: "Home", icono: BootstrapIcons.house, subMenu: []),
+    MenuOption(titulo: "Tramites", icono: BootstrapIcons.archive, subMenu: [
       "VISA Primera vez",
       "VISA Renovacion",
       "Global Entry",
@@ -12,13 +12,16 @@ class Statics {
     ]),
     MenuOption(
       titulo: "Usuarios",
-      icono: Icons.public,
+      icono: BootstrapIcons.person,
       subMenu: ["Administracion", "Plataforma"],
     ),
-    MenuOption(titulo: "Tiempos de espera", icono: Icons.route, subMenu: []),
+    MenuOption(
+        titulo: "Tiempos de espera",
+        icono: BootstrapIcons.calendar_event,
+        subMenu: []),
     MenuOption(
       titulo: "Referidos",
-      icono: Icons.diversity_3,
+      icono: BootstrapIcons.globe_americas,
       subMenu: [],
     ),
   ];

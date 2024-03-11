@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skeleton/models/auth_response.dart';
 import 'package:skeleton/models/general_response.dart';
+import 'package:skeleton/models/user.dart';
 import 'package:skeleton/repositories/usuarios_repository.dart';
 
 part 'referred_event.dart';

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:skeleton/models/auth_response.dart';
+import 'package:skeleton/models/user.dart';
 import 'package:skeleton/services/http_service.dart';
 
 class AuthRepository {
@@ -14,8 +15,11 @@ class AuthRepository {
       final response = await httpService.post(
           path: '/auth/login', data: {'email': userName, 'password': password});
 
+      print(response.body);
 
       final result = (jsonDecode(response.body));
+
+      print(result);
 
       httpService.actualizarToken(result["accessToken"]);
 
@@ -29,19 +33,19 @@ class AuthRepository {
           return AuthRError(message: result["message"]);
       }
     } catch (e) {
+      print("error");
+      print(e);
       return AuthRError();
     }
   }
 
   Future<AuthResponse<String>> isLoggedIn() async {
-
     try {
       final response = await httpService.get(
         path: '/auth/renewCode',
       );
 
       final result = (jsonDecode(response.body));
-
 
       switch (response.statusCode) {
         case 200:
@@ -54,6 +58,7 @@ class AuthRepository {
           return AuthRError(message: result["message"]);
       }
     } catch (e) {
+      print(e);
       return AuthRError();
     }
   }

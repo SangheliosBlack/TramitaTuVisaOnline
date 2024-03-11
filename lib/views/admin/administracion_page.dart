@@ -8,7 +8,7 @@ import 'package:skeleton/blocs/usuarios/usuarios_bloc.dart';
 import 'package:skeleton/helpers/avatar_color.dart';
 import 'package:skeleton/helpers/avatar_letters.dart';
 import 'package:skeleton/helpers/dates.dart';
-import 'package:skeleton/models/auth_response.dart';
+import 'package:skeleton/models/user.dart';
 import 'package:skeleton/themes/main_theme.dart';
 
 @RoutePage()
@@ -17,8 +17,8 @@ class AdministracionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UsuariosPlataformaBloc usuariosPlataformaBloc =
-        BlocProvider.of<UsuariosPlataformaBloc>(context);
+    final UsersBloc usuariosPlataformaBloc =
+        BlocProvider.of<UsersBloc>(context);
     return Scaffold(
       body: Column(
         children: [
@@ -65,7 +65,7 @@ class AdministracionPage extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        usuariosPlataformaBloc.add(InitPlataformaUsers());
+                        usuariosPlataformaBloc.add(InitUsers());
                       },
                       behavior: HitTestBehavior.translucent,
                       child: Container(
@@ -207,18 +207,18 @@ class AdministracionPage extends StatelessWidget {
             height: 10,
           ),
           Expanded(
-            child: BlocBuilder<UsuariosPlataformaBloc, UsuariosPlataformaState>(
+            child: BlocBuilder<UsersBloc, UsersState>(
               builder: (context, state) {
                 ColorManager colorManager = ColorManager();
                 return AnimatedSwitcher(
                   duration: const Duration(milliseconds: 200),
-                  child: state is UsuariosPlataformaLoading
+                  child: state is UsersLoading
                       ? const Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [CircularProgressIndicator()],
                         )
-                      : state is UsuariosPlataformaSuccess
+                      : state is UsersSuccess
                           ? state.listUsers.isNotEmpty
                               ? ListView.separated(
                                   itemBuilder: (_, int i) {

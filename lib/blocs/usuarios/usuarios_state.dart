@@ -1,28 +1,28 @@
 part of 'usuarios_bloc.dart';
 
-sealed class UsuariosPlataformaState extends Equatable {
-  const UsuariosPlataformaState();
+sealed class UsersState extends Equatable {
+  const UsersState();
 
   @override
   List<Object> get props => [];
 }
 
-final class UsuariosInitial extends UsuariosPlataformaState {}
+final class UsuariosInitial extends UsersState {}
 
-class UsuariosPlataformaLoading extends UsuariosPlataformaState {}
+class UsersLoading extends UsersState {}
 
-class UsuariosPlataformaSuccess extends UsuariosPlataformaState {
+class UsersSuccess extends UsersState {
   final List<Usuario> listUsers;
 
-  const UsuariosPlataformaSuccess({required this.listUsers});
+  const UsersSuccess({required this.listUsers});
 
   @override
   List<Object> get props => [listUsers];
 }
 
-class UsuariosPlataformaError extends UsuariosPlataformaState{
+class UsersError extends UsersState{
   final String message;
-  const UsuariosPlataformaError({required this.message});
+  const UsersError({required this.message});
   
   @override
   List<Object> get props => [message];

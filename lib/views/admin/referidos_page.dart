@@ -8,7 +8,7 @@ import 'package:skeleton/blocs/referred/referred_bloc.dart';
 import 'package:skeleton/helpers/avatar_color.dart';
 import 'package:skeleton/helpers/avatar_letters.dart';
 import 'package:skeleton/helpers/dates.dart';
-import 'package:skeleton/models/auth_response.dart';
+import 'package:skeleton/models/user.dart';
 import 'package:skeleton/themes/main_theme.dart';
 
 @RoutePage()

@@ -3,65 +3,96 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hovering/hovering.dart';
 
-class SubMenuOptionWidget extends StatelessWidget {
+class SubMenuOptionWidget extends StatefulWidget {
   final String titulo;
   final bool last;
   const SubMenuOptionWidget(
       {super.key, required this.titulo, this.last = false});
 
   @override
+  State<SubMenuOptionWidget> createState() => _SubMenuOptionWidgetState();
+}
+
+class _SubMenuOptionWidgetState extends State<SubMenuOptionWidget> {
+  bool hover = false;
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        context.router.pushNamed(titulo.toLowerCase());
+    return MouseRegion(
+      onEnter: (e) {
+        setState(() {
+          hover = true;
+        });
       },
-      behavior: HitTestBehavior.translucent,
-      child: HoverAnimatedContainer(
-        cursor: SystemMouseCursors.click,
-        hoverDecoration: BoxDecoration(
-            color: Colors.black.withOpacity(.5),
-            borderRadius: BorderRadius.circular(20)),
-        decoration: const BoxDecoration(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(left: 35),
-              height: 40,
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Container(
-                      width: .5,
-                      color: Colors.white.withOpacity(.2),
+      onExit: (e) {
+        setState(() {
+          hover = false;
+        });
+      },
+      child: GestureDetector(
+        onTap: () {
+          context.router.pushNamed(widget.titulo.toLowerCase());
+        },
+        behavior: HitTestBehavior.translucent,
+        child: HoverAnimatedContainer(
+          cursor: SystemMouseCursors.click,
+          hoverDecoration: BoxDecoration(
+              color: Colors.black.withOpacity(.5),
+              borderRadius: BorderRadius.circular(20)),
+          decoration: const BoxDecoration(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(left: 35),
+                height: 35,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: .5,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  const Icon(
-                    Icons.circle_outlined,
-                    color: Colors.white,
-                    size: 13,
-                  ),
-                  Expanded(
-                    child: Container(
-                      width: .5,
-                      color: Colors.white.withOpacity(last ? 0 : .2),
+                    Container(
+                      padding: const EdgeInsets.all(2),
+                      width: 11,
+                      height: 11,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.transparent,
+                          border: Border.all(
+                            width: 1,
+                            color: Colors.white,
+                          )),
+                      child: AnimatedContainer(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: hover
+                              ? const Color.fromRGBO(176, 251, 187, 1)
+                              : Colors.transparent,
+                        ),
+                        duration: const Duration(milliseconds: 200),
+                      ),
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: Container(
+                        width: .5,
+                        color: Colors.white.withOpacity(widget.last ? 0 : 1),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Text(
-              titulo,
-              style: GoogleFonts.quicksand(color: Colors.grey),
-            ),
-          ],
+              const SizedBox(
+                width: 15,
+              ),
+              Text(
+                widget.titulo,
+                style: GoogleFonts.quicksand(color: Colors.white),
+              ),
+            ],
+          ),
         ),
       ),
     );

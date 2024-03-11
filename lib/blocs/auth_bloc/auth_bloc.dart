@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:skeleton/models/auth_response.dart';
+import 'package:skeleton/models/user.dart';
 import 'package:skeleton/repositories/auth_repository.dart';
 import 'package:skeleton/services/http_service.dart';
 import 'package:skeleton/services/local_storage.dart';

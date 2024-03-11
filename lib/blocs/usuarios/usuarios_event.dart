@@ -7,7 +7,7 @@ abstract class UsuariosPlataformaEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class InitPlataformaUsers extends UsuariosPlataformaEvent {
+class InitUsers extends UsuariosPlataformaEvent {
   @override
   List<Object> get props => [];
 }
