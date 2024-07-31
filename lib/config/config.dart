@@ -6,9 +6,9 @@ import 'package:skeleton/helpers/colorized_helper.dart';
 import 'package:skeleton/helpers/logger.dart';
 
 class Developer {
-  final backendUrl = "http://192.168.100.24";
-  //final backendUrl = "https://www.tramitesvisaonline.com/api/v1";
-  final port = "3000";
+  //final backendUrl = "http://192.168.100.24";
+  final backendUrl = "https://www.tramitesvisaonline.com/api/v1";
+  final port = "";
   final apiVersion = "api/v1";
   Logger logger = LogHelper.getLogger(LogNames.SERVER_CONNECTION);
 
